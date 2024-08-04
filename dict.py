@@ -57,6 +57,18 @@ def decode_pinyin(s):
     r += t
     return r
 
+def pinyin_multiple(englishtranslation):
+	plist=[]
+	pinyinword=englishtranslation.split('[')[1].split(']')[0]
+	try:
+		for q in pinyinword.split(' '):
+			plist.append(decode_pinyin(q))
+		pword2=' '.join(plist)
+	except:
+		pword2=decode_pinyin(pinyinword)
+	englishtranslation=englishtranslation.replace(pinyinword,pword2).replace('[', ' (',1).replace(']',')',1)
+	return englishtranslation
+
 with io.open('dict.txt', encoding="utf-8") as dictionary:
 	dictionaryfile=dictionary.readlines()
 
@@ -78,7 +90,11 @@ for i in dictionaryfile:
 				pword=' '.join(plist)
 			except:
 				pword=decode_pinyin(pinyinword)
-			englishtranslation=(i.split('[')[1].split(']')[1].replace('/','',1))
+			englishtranslation=(i.split('[', 1)[1].split(']', 1)[1].replace('/','',1))
+			while '|' in englishtranslation:
+				englishtranslation=englishtranslation.replace(str(englishtranslation.split('|',1)[0].split(' ')[-1] + '|'), '')
+			while '[' in englishtranslation:
+				englishtranslation=pinyin_multiple(englishtranslation)
 			englishtranslation=englishtranslation[::-1]
 			englishtranslation=englishtranslation.replace('/','',1)
 			englishtranslation=englishtranslation[::-1]
@@ -91,7 +107,7 @@ for i in dictionaryfile:
 			print('error')
 
 if keywordfound is False:
-	print('Nothing found matching %s' % searchword)
+	print('\tNothing found matching %s' % searchword)
 
 #output.close()
 
