@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "$1" != "" ]; then
+	python3 dict.py "$1"
+else
+	read -p "Enter chinese word to translate: " searchword
+	python3 dict.py  "$searchword"
+	while true; do
+		read -p "Word: " searchword
+		python3 dict.py  "$searchword"
+	done
+fi
