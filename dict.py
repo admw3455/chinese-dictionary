@@ -62,6 +62,8 @@ with io.open('dict.txt', encoding="utf-8") as dictionary:
 
 #output=io.open('output.txt', 'a', encoding="utf-8")
 
+keywordfound=False
+
 for i in dictionaryfile:
 	if i[0] == '#':
 		pass
@@ -83,9 +85,13 @@ for i in dictionaryfile:
 			englishtranslation=englishtranslation.replace('/',', ')
 			if searchword == chineseword:
 				print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
+				keywordfound=True
 			#output.write('%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ')))
 		except:
 			print('error')
+
+if keywordfound is False:
+	print('Nothing found matching %s' % searchword)
 
 #output.close()
 
