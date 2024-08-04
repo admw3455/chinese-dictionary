@@ -9,9 +9,11 @@ if '3' not in sys.version.split('.')[0]:
 
 try:
 	searchword=sys.argv[1]
+	dictdir=str(sys.argv[2] + 'dict.txt')
 except:
 	print('No search word provided, exiting')
 	sys.exit(1)
+
 
 PinyinToneMark = {
     0: "aoeiuv\u00fc",
@@ -69,7 +71,7 @@ def pinyin_multiple(englishtranslation):
 	englishtranslation=englishtranslation.replace(pinyinword,pword2).replace('[', ' (',1).replace(']',')',1)
 	return englishtranslation
 
-with io.open('dict.txt', encoding="utf-8") as dictionary:
+with io.open(dictdir, encoding="utf-8") as dictionary:
 	dictionaryfile=dictionary.readlines()
 
 #output=io.open('output.txt', 'a', encoding="utf-8")

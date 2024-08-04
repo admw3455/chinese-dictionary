@@ -1,12 +1,15 @@
 #!/bin/bash
+
+workingdir="$(dirname $(readlink -f $0))/"
+
 if [ "$1" != "" ]; then
-	python3 dict.py "$1"
+	python3 "$workingdir"dict.py "$1" "$workingdir"
 else
 	printf "Enter q to quit\n\n"
 	read -p "Enter chinese word to translate: " searchword && if [ $searchword == "q" ]; then exit; fi
-	python3 dict.py  "$searchword"
+	python3 "$workingdir"dict.py  "$searchword" "$workingdir"
 	while true; do
 		read -p "Word: " searchword && if [ $searchword == "q" ]; then exit; fi
-		python3 dict.py  "$searchword"
+		python3 "$workingdir"dict.py  "$searchword" "$workingdir"
 	done
 fi
