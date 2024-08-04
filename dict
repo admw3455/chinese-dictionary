@@ -2,10 +2,11 @@
 if [ "$1" != "" ]; then
 	python3 dict.py "$1"
 else
-	read -p "Enter chinese word to translate: " searchword
+	printf "Enter q to quit\n\n"
+	read -p "Enter chinese word to translate: " searchword && if [ $searchword == "q" ]; then exit; fi
 	python3 dict.py  "$searchword"
 	while true; do
-		read -p "Word: " searchword
+		read -p "Word: " searchword && if [ $searchword == "q" ]; then exit; fi
 		python3 dict.py  "$searchword"
 	done
 fi
