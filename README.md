@@ -2,12 +2,11 @@ Only for linux, usage:
 
 Give permission to run with 'chmod +x dict'
 
-Run with './dict'
+Run with './dict' or copy to usr/local/bin with 'sudo cp dict* /usr/local/bin' (if you have the package dict installed from an official rep., rename dict to another name)
 
-Usage:
-'./dict 你好' returns translation for 你好
+Usage: 'dict 你好' returns translation for 你好
 
-'./dict' takes user input for continous use
+'dict' takes user input for continous use
 
 Based on CCDICT, please follow their license.
 
