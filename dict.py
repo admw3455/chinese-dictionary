@@ -9,7 +9,7 @@ if '3' not in sys.version.split('.')[0]:
 
 try:
 	searchword=sys.argv[1]
-	dictdir=str(sys.argv[2] + 'dict.txt')
+	dictdir=str(sys.argv[-1] + 'dict.txt')
 except:
 	print('No search word provided, exiting')
 	sys.exit(1)
@@ -101,7 +101,7 @@ for i in dictionaryfile:
 			englishtranslation=englishtranslation.replace('/','',1)
 			englishtranslation=englishtranslation[::-1]
 			englishtranslation=englishtranslation.replace('/',', ')
-			if searchword == chineseword:
+			if searchword == chineseword or searchword == pword or searchword == pword.replace(' ','') or searchword == pinyinword or searchword == pinyinword.replace(' ',''):
 				print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
 				keywordfound=True
 			#output.write('%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ')))
