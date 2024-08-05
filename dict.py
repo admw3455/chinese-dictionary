@@ -61,14 +61,14 @@ def decode_pinyin(s):
 
 def pinyin_multiple(englishtranslation):
 	plist=[]
-	pinyinword=englishtranslation.split('[')[1].split(']')[0]
+	pinyinword2=englishtranslation.split('[')[1].split(']')[0]
 	try:
-		for q in pinyinword.split(' '):
+		for q in pinyinword2.split(' '):
 			plist.append(decode_pinyin(q))
 		pword2=' '.join(plist)
 	except:
-		pword2=decode_pinyin(pinyinword)
-	englishtranslation=englishtranslation.replace(pinyinword,pword2).replace('[', ' (',1).replace(']',')',1)
+		pword2=decode_pinyin(pinyinword2)
+	englishtranslation=englishtranslation.replace(pinyinword2,pword2).replace('[', ' (',1).replace(']',')',1)
 	return englishtranslation
 
 with io.open(dictdir, encoding="utf-8") as dictionary:
