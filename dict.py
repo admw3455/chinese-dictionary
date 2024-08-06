@@ -14,6 +14,16 @@ except:
 	print('No search word provided, exiting')
 	sys.exit(1)
 
+if searchword == "q":
+	sys.exit()
+
+try:
+	if sys.argv[2] == "freetext":
+		freetext=True
+	else:
+		freetext=False
+except:
+	freetext=False
 
 PinyinToneMark = {
     0: "aoeiuv\u00fc",
@@ -101,10 +111,35 @@ for i in dictionaryfile:
 			englishtranslation=englishtranslation.replace('/','',1)
 			englishtranslation=englishtranslation[::-1]
 			englishtranslation=englishtranslation.replace('/',', ')
-			if searchword == chineseword or searchword.lower() == pword or searchword.lower() == pword.replace(' ','') or searchword.lower() == pinyinword or searchword.lower() == pinyinword.replace(' ',''):
-				print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
-				keywordfound=True
-			#output.write('%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ')))
+			if freetext==True:
+				if ' ' in searchword:
+					searchword1=searchword.split(' ')
+					freetextlist=[]
+					for h in searchword1:
+						if h.lower() in chineseword or h.lower() in pword or h.lower() in pinyinword or h.lower() in englishtranslation:
+							if str('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n',''))) not in freetextlist:
+								freetextlist.append('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
+							else:
+								pass
+						else:
+							try:
+								freetextlist.remove('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
+							except:
+								pass
+							break
+					if len(freetextlist) > 0:
+						for k in freetextlist:
+							print(k)
+							keywordfound=True
+				else:
+					if searchword.lower() in chineseword or searchword.lower() in pword or searchword.lower() in pinyinword or searchword.lower() in englishtranslation:
+						print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
+						keywordfound=True
+			else:
+				if searchword == chineseword or searchword.lower() == pword or searchword.lower() == pword.replace(' ','') or searchword.lower() == pinyinword or searchword.lower() == pinyinword.replace(' ',''):
+					print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
+					keywordfound=True
+				#output.write('%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ')))
 		except:
 			print('error')
 

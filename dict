@@ -7,11 +7,11 @@ searchsimple="$@"
 if [ "$1" != "" ]; then
 	python3 "$workingdir"dict.py "$searchsimple" "$workingdir"
 else
-	printf "Enter q to quit\n\n"
-	read -p "Enter chinese word to translate: " searchword && if [ "$searchword" == "q" ]; then exit; fi
+	printf "Enter q to quit, c to enter free text search mode\n\n"
+	read -p "Enter chinese word to translate: " searchword && if [ "$searchword" == "q" ]; then exit; fi && if [ "$searchword" ==  "c" ]; then while true; do read -p "Free text search: " searchword && if [ "$searchword" != "q" ]; then python3 "$workingdir"dict.py  "$searchword" "freetext" "$workingdir"; else break; fi; done; fi
 	python3 "$workingdir"dict.py  "$searchword" "$workingdir"
 	while true; do
-		read -p "Word: " searchword && if [ "$searchword" == "q" ]; then exit; fi
+		read -p "Word: " searchword && if [ "$searchword" == "q" ]; then exit; fi && if [ "$searchword" ==  "c" ]; then while true; do read -p "Free text search: " searchword && if [ "$searchword" != "q" ]; then python3 "$workingdir"dict.py  "$searchword" "freetext" "$workingdir"; else break; fi; done; fi
 		python3 "$workingdir"dict.py  "$searchword" "$workingdir"
 	done
 fi
