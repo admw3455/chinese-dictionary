@@ -101,7 +101,7 @@ for i in dictionaryfile:
 			englishtranslation=englishtranslation.replace('/','',1)
 			englishtranslation=englishtranslation[::-1]
 			englishtranslation=englishtranslation.replace('/',', ')
-			if searchword == chineseword or searchword == pword or searchword == pword.replace(' ','') or searchword == pinyinword or searchword == pinyinword.replace(' ',''):
+			if searchword == chineseword or searchword.lower() == pword or searchword.lower() == pword.replace(' ','') or searchword.lower() == pinyinword or searchword.lower() == pinyinword.replace(' ',''):
 				print('\t%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ').replace('\n','')))
 				keywordfound=True
 			#output.write('%s (%s): %s' % (chineseword, pword, englishtranslation.replace('  ', ' ')))
