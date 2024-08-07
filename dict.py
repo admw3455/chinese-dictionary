@@ -104,7 +104,7 @@ for i in dictionaryfile:
 				pword=decode_pinyin(pinyinword)
 			englishtranslation=(i.split('[', 1)[1].split(']', 1)[1].replace('/','',1))
 			while '|' in englishtranslation:
-				englishtranslation=englishtranslation.replace(str(englishtranslation.split('|',1)[0].split(' ')[-1] + '|'), '')
+				englishtranslation=englishtranslation.replace(str(englishtranslation.split('|',1)[0].split('/')[-1].split(' ')[-1] + '|'), '')
 			while '[' in englishtranslation:
 				englishtranslation=pinyin_multiple(englishtranslation)
 			englishtranslation=englishtranslation[::-1]
